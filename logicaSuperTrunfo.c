@@ -169,11 +169,11 @@ int main() {
 
         // Definição da carta vencedora
         if(empates > vencedorA && empates > vencedorB) {
-            printf("\nEmpate!\n");
+            printf("\nEmpate geral! Ambos possuem %d pontos.\n", vencedorA);
         } else if (vencedorA > vencedorB) {
-            printf("\nCarta A é a vencedora com (%d) pontos!\n", vencedorA);
+            printf("\nCarta A é a vencedora com %d pontos!\n", vencedorA);
         } else {
-            printf("\nCarta B é a vencedora com (%d) pontos!\n", vencedorB);
+            printf("\nCarta B é a vencedora com %d pontos!\n", vencedorB);
         }
 
     } while (opcao1 != 6 && opcao2 != 6); 
