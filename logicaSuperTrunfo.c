@@ -173,13 +173,13 @@ int main() {
         } else if (vencedorA > vencedorB) {
             printf("\nCarta A é a vencedora com (%d) pontos!\n", vencedorA);
         } else {
-            printf("\nCarta B é a vencedora com (%d) pontos!\n", vencedorA);
+            printf("\nCarta B é a vencedora com (%d) pontos!\n", vencedorB);
         }
 
     } while (opcao1 != 6 && opcao2 != 6); 
 
     // Mensagem de saída
     printf("Saindo do programa...\n");
-    
+
     return 0;
 }
