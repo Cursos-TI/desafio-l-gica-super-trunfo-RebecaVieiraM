@@ -59,6 +59,9 @@ int main() {
     pibPerCapitaA = (populacaoA > 0) ? (pibA / populacaoA) : 0;
     pibPerCapitaB = (populacaoB > 0) ? (pibB / populacaoB) : 0;
 
+    // Contadores para definir a carta vencedora
+    int vencedorA = 0, vencedorB = 0;
+ 
     // Loop de Comparação das Cartas
     do{
         // Exibição do menu de escolha de critérios
@@ -84,102 +87,44 @@ int main() {
             continue; // Volta ao início do loop
         }
 
-        // Contadores para definir a carta vencedora
-        int vencedorA = 0, vencedorB = 0, empates = 0;
-
         // Comparação de cada critério escolhido
         for(int i = 0; i < 2; i++){
             int opcao = (i == 0) ? opcao1 : opcao2;
+            float valorA = 0, valorB = 0;
+            char criterio[30];
         
             switch (opcao) {
-                case 1:
-                    if (populacaoA > populacaoB){
-                        printf("%s venceu com maior população (%d).\n", nomeCidadeA, populacaoA); 
-                        vencedorA++;
-                    }
-                    else if (populacaoA == populacaoB){
-                        printf("Empate! Ambas as cartas possuem a mesma população (%d).\n", populacaoB);
-                        empates++;
-                    }
-                    else {
-                        printf("%s venceu com maior população (%d).\n", nomeCidadeB, populacaoB);
-                        vencedorB++;
-                    }
-                    break;
-                case 2:
-                    if (areaA > areaB){
-                        printf("%s venceu com maior área (%.2f km²).\n", nomeCidadeA, areaA); 
-                        vencedorA++;
-                    }
-                    else if (areaA == areaB){
-                        printf("Empate! Ambas as cartas possuem a mesma área (%.2f km²).\n", areaA); 
-                        empates++;
-                    }
-                    else {
-                        printf("%s venceu com maior área (%.2f km²).\n", nomeCidadeB, areaB); 
-                        vencedorB++;
-                    }
-                    break;
-                case 3:
-                    if (pibA > pibB){
-                        printf("%s venceu com maior PIB (%.2f).\n", nomeCidadeA, pibA); 
-                        vencedorA++;
-                    }
-                    else if (pibA == pibB){
-                        printf("Empate! Ambas as cartas possuem mesmo PIB (%.2f).\n", pibA); 
-                        empates++;
-                    }
-                    else {
-                        printf("%s venceu com maior PIB (%.2f).\n", nomeCidadeB, pibB);
-                        vencedorB++;
-                    }
-                    break;
-                case 4:
-                    if (densidadePopulacionalA > densidadePopulacionalB){
-                        printf("%s venceu com maior densidade populacional (%.2f hab/km²).\n", nomeCidadeA, densidadePopulacionalA); 
-                        vencedorA++;
-                    }
-                    else if (densidadePopulacionalA == densidadePopulacionalB){
-                        printf("Empate! Ambas as cartas possuem a mesma densidade populacional (%.2f hab/km²).\n", densidadePopulacionalA); 
-                        empates++;
-                    }
-                    else {
-                        printf("%s venceu com maior densidade populacional (%.2f hab/km²).\n", nomeCidadeB, densidadePopulacionalB); 
-                        vencedorB++;
-                    }
-                    break;
-                case 5:
-                    if (pibPerCapitaA > pibPerCapitaB){
-                        printf("%s venceu com maior PIB per capita (%.2f).\n", nomeCidadeA, pibPerCapitaA); 
-                        vencedorA++;
-                    }
-                    else if (pibPerCapitaA == pibPerCapitaB){
-                        printf("Empate! Ambas as cartas possuem mesmo PIB per capita (%.2f).\n", pibPerCapitaA); 
-                        empates++;
-                    }
-                    else {
-                        printf("%s venceu com maior PIB per capita (%.2f).\n", nomeCidadeB, pibPerCapitaB); 
-                        vencedorB++;
-                    }
-                    break;
-                default:
-                    printf("Opção inválida!\n");
+              case 1: valorA = populacaoA; valorB = populacaoB; sprintf(criterio, "População"); break;
+              case 2: valorA = areaA; valorB = areaB; sprintf(criterio, "Área"); break; 
+              case 3: valorA = pibA; valorB = pibB; sprintf(criterio, "PIB"); break;
+              case 4: valorA = densidadePopulacionalA; valorB = densidadePopulacionalB; sprintf(criterio, "Densidade Populacional"); break;
+              case 5: valorA = pibPerCapitaA; valorB = pibPerCapitaB; sprintf(criterio, "PIB per capita"); break; 
             }
-        }
 
-        // Definição da carta vencedora
-        if(vencedorA == vencedorB) {
-            printf("\nEmpate geral! Ambos possuem %d pontos.\n", vencedorA);
-        } else if (vencedorA > vencedorB) {
-            printf("\nCarta A é a vencedora com %d pontos!\n", vencedorA);
-        } else {
-            printf("\nCarta B é a vencedora com %d pontos!\n", vencedorB);
+            if ( valorA > valorB ) {
+                printf("%s venceu com maior %s (%.2f).\n", nomeCidadeA, criterio, valorA);
+                vencedorA++;
+            } else if ( valorA < valorB ) {
+                printf("%s venceu com maior %s (%.2f).\n", nomeCidadeB, criterio, valorB);
+                vencedorB++;
+            } else {
+                printf("Empate no critério %s (%.2f).\n", criterio, valorA);
+            }
         }
 
     } while (opcao1 != 6 && opcao2 != 6); 
 
     // Mensagem de saída
     printf("Saindo do programa...\n");
+
+    // Definição da carta vencedora
+    if(vencedorA == vencedorB) {
+        printf("\nEmpate geral! Ambos possuem %d pontos.\n", vencedorA);
+    } else if (vencedorA > vencedorB) {
+        printf("\nCarta A (%s) é a vencedora com %d pontos!\n", nomeCidadeA, vencedorA);
+    } else {
+        printf("\nCarta B (%s) é a vencedora com %d pontos!\n", nomeCidadeB, vencedorB);
+    }
 
     return 0;
 }
