@@ -60,7 +60,7 @@ int main() {
     pibPerCapitaB = (populacaoB > 0) ? (pibB / populacaoB) : 0;
 
     // Contadores para definir a carta vencedora
-    int pontuacaoA = 0, pontuacaoB = 0;
+    int pontuacaoA = 0, pontuacaoB = 0, empates = 0;
  
     // Loop de Comparação das Cartas
     do{
@@ -77,8 +77,9 @@ int main() {
         scanf("%d", &opcao1);
         if (opcao1 == 6) break;
 
-        printf("Escolha o segundo critério: ");
+        printf("Escolha o segundo critério:");
         scanf("%d", &opcao2);
+        printf("\n");
         if (opcao2 == 6) break;
 
         // Validação das opções
@@ -109,6 +110,7 @@ int main() {
                 pontuacaoB++;
             } else {
                 printf("Empate no critério %s (%.2f).\n", criterio, valorA);
+                empates++;
             }
         }
 
@@ -117,10 +119,14 @@ int main() {
     // Mensagem de saída
     printf("Saindo do programa...\n");
 
-    // Exibição da carta vencedora
-    printf("\nPontuação final:\n");
+    // Exibição da pontuação final
+    printf("\n===========================");
+
+    printf("\n---Pontuação final---\n");
+    printf("\n");
     printf("Carta A (%s): %d pontos\n", nomeCidadeA, pontuacaoA);
     printf("Carta B (%s): %d pontos\n", nomeCidadeB, pontuacaoB);
+    printf("Empates: %d\n", empates);
 
     // Definição da carta vencedora
     if(pontuacaoA == pontuacaoB) {
@@ -130,6 +136,7 @@ int main() {
     } else {
         printf("\nCarta B (%s) é a vencedora!\n", nomeCidadeB);
     }
+    printf("===========================\n");
 
     return 0;
 }
