@@ -1,23 +1,29 @@
 #include <stdio.h>
 
+// ========================================= 
 // Programa: Desafio Super Trunfo - Comparação de Cartas de Estados
-// Descrição: O programa compara duas cartas baseadas em critérios escolhidos pelo usuário
+// Descrição: O programa simula um jogo no estilo "Super Trunfo", onde duas cartas
+// representando cidades são comparadas com base em critérios escolhidos pelo usuário.
+// O jogador escolhe dois critérios por rodada, e a cidade com os melhores valores
+// acumula pontos. No final, a cidade com mais pontos vence o jogo.
+//
 // Autor: Rebeca Vieira Maia
+// ========================================= 
 
 int main() {
 
-    // Declaração de variáveis
-    char estadoA[50], estadoB[50]; // Nome do estado
-    char codigoCartaA[10], codigoCartaB[10]; // Código identificador da carta
-    char nomeCidadeA[50], nomeCidadeB[50]; // Nome da cidade
-    int populacaoA, populacaoB; // População da cidade
-    float areaA, areaB; //  Área da cidade em km²
-    float pibA, pibB; // Produto Interno Bruto da cidade
-    int numPontosTuristicosA, numPontosTuristicosB; // Número de pontos turísticos da cidade
-    float densidadePopulacionalA, densidadePopulacionalB; // Habitantes da cidade por km²
-    float pibPerCapitaA, pibPerCapitaB; // PIB per capita da cidade
+    // Declaração de variáveis para armazenar os dados das cartas
+    char estadoA[50], estadoB[50]; 
+    char codigoCartaA[10], codigoCartaB[10]; 
+    char nomeCidadeA[50], nomeCidadeB[50]; 
+    int populacaoA, populacaoB; 
+    float areaA, areaB; 
+    float pibA, pibB; 
+    int numPontosTuristicosA, numPontosTuristicosB;
+    float densidadePopulacionalA, densidadePopulacionalB; 
+    float pibPerCapitaA, pibPerCapitaB; 
 
-    int opcao1, opcao2; // Opções escolhidas para a comparação
+    int criterio1, criterio2; // Critérios escolhidos para a comparação
 
     // Entradas de dados - Carta A
     printf("\nDados da carta A:\n");
@@ -59,12 +65,12 @@ int main() {
     pibPerCapitaA = (populacaoA > 0) ? (pibA / populacaoA) : 0;
     pibPerCapitaB = (populacaoB > 0) ? (pibB / populacaoB) : 0;
 
-    // Contadores para definir a carta vencedora
+    // Inicialização da pontuação
     int pontuacaoA = 0, pontuacaoB = 0, empates = 0;
  
-    // Loop de Comparação das Cartas
+    // Loop para permitir múltiplas comparações
     do{
-        // Exibição do menu de escolha de critérios
+        // Exibição do menu de critérios
         printf("\nEscolha dois critérios para comparar:\n");
         printf("1 - População\n");
         printf("2 - Área\n");
@@ -74,23 +80,23 @@ int main() {
         printf("6 - Sair\n");
 
         printf("Escolha o primeiro critério: ");
-        scanf("%d", &opcao1);
-        if (opcao1 == 6) break;
+        scanf("%d", &criterio1);
+        if (criterio1 == 6) break;
 
         printf("Escolha o segundo critério:");
-        scanf("%d", &opcao2);
+        scanf("%d", &criterio2);
         printf("\n");
-        if (opcao2 == 6) break;
+        if (criterio2 == 6) break;
 
-        // Validação das opções
-        if (opcao1 < 1 || opcao1 > 5 || opcao2 < 1 || opcao2 > 5) {
+        // Validação das opções escolhidas
+        if (criterio1 < 1 || criterio1 > 5 || criterio2 < 1 || criterio2 > 5) {
             printf("Opção inválida! Escolha entre 1 e 5.\n");
             continue; // Volta ao início do loop
         }
 
-        // Comparação de cada critério escolhido
+        // Comparação dos critérios escolhidos
         for(int i = 0; i < 2; i++){
-            int opcao = (i == 0) ? opcao1 : opcao2;
+            int opcao = (i == 0) ? criterio1 : criterio2;
             float valorA = 0, valorB = 0;
             char criterio[30];
         
@@ -114,27 +120,22 @@ int main() {
             }
         }
 
-    } while (opcao1 != 6 && opcao2 != 6); 
-
-    // Mensagem de saída
-    printf("Saindo do programa...\n");
+    } while (criterio1 != 6 && criterio2 != 6); //Sai da estrutura de repetição ao digitar "6"
 
     // Exibição da pontuação final
     printf("\n===========================");
-
     printf("\n---Pontuação final---\n");
-    printf("\n");
-    printf("Carta A (%s): %d pontos\n", nomeCidadeA, pontuacaoA);
+    printf("\nCarta A (%s): %d pontos\n", nomeCidadeA, pontuacaoA);
     printf("Carta B (%s): %d pontos\n", nomeCidadeB, pontuacaoB);
     printf("Empates: %d\n", empates);
 
     // Definição da carta vencedora
-    if(pontuacaoA == pontuacaoB) {
-        printf("\nEmpate geral!\n");
-    } else if (pontuacaoA > pontuacaoB) {
+    if(pontuacaoA > pontuacaoB) {
         printf("\nCarta A (%s) é a vencedora!\n", nomeCidadeA);
-    } else {
+    } else if (pontuacaoA < pontuacaoB) {
         printf("\nCarta B (%s) é a vencedora!\n", nomeCidadeB);
+    } else {
+        printf("\nEmpate geral!\n");
     }
     printf("===========================\n");
 
