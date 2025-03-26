@@ -60,7 +60,7 @@ int main() {
     pibPerCapitaB = (populacaoB > 0) ? (pibB / populacaoB) : 0;
 
     // Contadores para definir a carta vencedora
-    int vencedorA = 0, vencedorB = 0;
+    int pontuacaoA = 0, pontuacaoB = 0;
  
     // Loop de Comparação das Cartas
     do{
@@ -103,10 +103,10 @@ int main() {
 
             if ( valorA > valorB ) {
                 printf("%s venceu com maior %s (%.2f).\n", nomeCidadeA, criterio, valorA);
-                vencedorA++;
+                pontuacaoA++;
             } else if ( valorA < valorB ) {
                 printf("%s venceu com maior %s (%.2f).\n", nomeCidadeB, criterio, valorB);
-                vencedorB++;
+                pontuacaoB++;
             } else {
                 printf("Empate no critério %s (%.2f).\n", criterio, valorA);
             }
@@ -117,13 +117,18 @@ int main() {
     // Mensagem de saída
     printf("Saindo do programa...\n");
 
+    // Exibição da carta vencedora
+    printf("\nPontuação final:\n");
+    printf("Carta A (%s): %d pontos\n", nomeCidadeA, pontuacaoA);
+    printf("Carta B (%s): %d pontos\n", nomeCidadeB, pontuacaoB);
+
     // Definição da carta vencedora
-    if(vencedorA == vencedorB) {
-        printf("\nEmpate geral! Ambos possuem %d pontos.\n", vencedorA);
-    } else if (vencedorA > vencedorB) {
-        printf("\nCarta A (%s) é a vencedora com %d pontos!\n", nomeCidadeA, vencedorA);
+    if(pontuacaoA == pontuacaoB) {
+        printf("\nEmpate geral!\n");
+    } else if (pontuacaoA > pontuacaoB) {
+        printf("\nCarta A (%s) é a vencedora!\n", nomeCidadeA);
     } else {
-        printf("\nCarta B (%s) é a vencedora com %d pontos!\n", nomeCidadeB, vencedorB);
+        printf("\nCarta B (%s) é a vencedora!\n", nomeCidadeB);
     }
 
     return 0;
